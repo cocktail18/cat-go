@@ -205,7 +205,7 @@ func (config *Config) SetHttpServerPort(httpServerPort int) *Config {
 	return config
 }
 
-func (config *Config) addHttpServerAddress(host string, port int) *Config {
+func (config *Config) AddHttpServerAddress(host string, port int) *Config {
 	if config.httpServerAddresses == nil {
 		config.httpServerAddresses = make([]serverAddress, 0, 2)
 		config.httpServerAddresses = append(config.httpServerAddresses, serverAddress{host, port})
@@ -213,7 +213,7 @@ func (config *Config) addHttpServerAddress(host string, port int) *Config {
 	return config
 }
 
-func (config *Config) addServerAddress(host string, port int) *Config {
+func (config *Config) AddServerAddress(host string, port int) *Config {
 	if config.serverAddress == nil {
 		config.serverAddress = make([]serverAddress, 0, 2)
 		config.serverAddress = append(config.serverAddress, serverAddress{host, port})
@@ -221,7 +221,7 @@ func (config *Config) addServerAddress(host string, port int) *Config {
 	return config
 }
 
-func (config *Config) setLogDir(dir string) *Config {
+func (config *Config) SetLogDir(dir string) *Config {
 	config.logDir = dir
 	return config
 }

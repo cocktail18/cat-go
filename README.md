@@ -48,12 +48,12 @@ func init() {
 		SetEnv("pro").
 		SetIp("127.0.0.1").
 		SetIpHex("xxx").
-		setLogDir("/data/log").
+		SetLogDir("/data/log").
 		SetHttpServerPort(1024).
-		addHttpServerAddress("127.0.0.2", 1000).
-		addHttpServerAddress("127.0.0.3", 1001).
-		addServerAddress("127.0.0.4", 1004).
-		addServerAddress("127.0.0.5", 1005)
+		AddHttpServerAddress("127.0.0.2", 1000).
+		AddHttpServerAddress("127.0.0.3", 1001).
+		AddServerAddress("127.0.0.4", 1004).
+		AddServerAddress("127.0.0.5", 1005)
 	InitByConfig(cfg)
     */
 }
