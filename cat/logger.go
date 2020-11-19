@@ -78,4 +78,5 @@ func (l *Logger) Error(format string, args ...interface{}) {
 	l.write("[Error]", format, args...)
 }
 
-var logger = createLogger()
+var logger *Logger
+

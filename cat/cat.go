@@ -24,6 +24,7 @@ func InitByConfig(cfg *Config) {
 }
 
 func start() {
+	logger = createLogger()
 	enable()
 
 	go background(&router)
