@@ -145,7 +145,7 @@ func (config *Config) fixIpAndHostname() (err error) {
 	return err
 }
 
-func (config *Config) InitByConfig(cfg *Config) (err error) {
+func (config *Config) initByConfig(cfg *Config) (err error) {
 	defer func() {
 		if err == nil {
 			logger.Info("Cat has been initialized successfully with appkey: %s", config.domain)

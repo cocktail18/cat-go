@@ -16,7 +16,7 @@ func Init(domain string) {
 }
 
 func InitByConfig(cfg *Config) {
-	if err := config.InitByConfig(cfg); err != nil {
+	if err := config.initByConfig(cfg); err != nil {
 		logger.Warning("Cat initialize failed.")
 		return
 	}
