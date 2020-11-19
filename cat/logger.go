@@ -90,5 +90,5 @@ func (l *DefaultLogger) SetOutput(w io.Writer) {
 	l.logger.SetOutput(w)
 }
 
-var logger Logger
+var logger Logger = createLogger()
 

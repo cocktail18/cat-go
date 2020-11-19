@@ -173,6 +173,9 @@ func (config *Config) initByConfig(cfg *Config) (err error) {
 	if cfg.logDir != "" {
 		config.logDir = cfg.logDir
 	}
+	if cfg.logger != nil {
+		config.logger = cfg.logger
+	}
 	return
 }
 

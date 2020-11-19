@@ -24,9 +24,7 @@ func InitByConfig(cfg *Config) {
 }
 
 func start() {
-	if config.logger == nil {
-		logger = createLogger()
-	} else {
+	if config.logger != nil {
 		logger = config.logger
 	}
 	enable()
