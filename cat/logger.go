@@ -9,18 +9,26 @@ import (
 	"time"
 )
 
-type Logger struct {
+type Logger interface {
+	Debug(format string, args ...interface{})
+	Info(format string, args ...interface{})
+	Warning(format string, args ...interface{})
+	Error(format string, args ...interface{})
+	SetOutput(w io.Writer)
+}
+
+type DefaultLogger struct {
 	logger     *log.Logger
 	mu         sync.Mutex
 	currentDay int
 }
 
-func createLogger() *Logger {
+func createLogger() *DefaultLogger {
 	now := time.Now()
 
 	var writer = getWriterByTime(now)
 
-	return &Logger{
+	return &DefaultLogger{
 		logger:     log.New(writer, "", log.LstdFlags),
 		mu:         sync.Mutex{},
 		currentDay: now.Day(),
@@ -43,7 +51,7 @@ func getWriterByTime(time time.Time) io.Writer {
 	}
 }
 
-func (l *Logger) switchLogFile(time time.Time) {
+func (l *DefaultLogger) switchLogFile(time time.Time) {
 	l.mu.Lock()
 	defer l.mu.Unlock()
 
@@ -53,7 +61,7 @@ func (l *Logger) switchLogFile(time time.Time) {
 	l.logger.SetOutput(getWriterByTime(time))
 }
 
-func (l *Logger) write(prefix, format string, args ...interface{}) {
+func (l *DefaultLogger) write(prefix, format string, args ...interface{}) {
 	now := time.Now()
 
 	if now.Day() != l.currentDay {
@@ -62,21 +70,25 @@ func (l *Logger) write(prefix, format string, args ...interface{}) {
 	l.logger.Printf(prefix+" "+format, args...)
 }
 
-func (l *Logger) Debug(format string, args ...interface{}) {
+func (l *DefaultLogger) Debug(format string, args ...interface{}) {
 	l.write("[Debug]", format, args...)
 }
 
-func (l *Logger) Info(format string, args ...interface{}) {
+func (l *DefaultLogger) Info(format string, args ...interface{}) {
 	l.write("[Info]", format, args...)
 }
 
-func (l *Logger) Warning(format string, args ...interface{}) {
+func (l *DefaultLogger) Warning(format string, args ...interface{}) {
 	l.write("[Warning]", format, args...)
 }
 
-func (l *Logger) Error(format string, args ...interface{}) {
+func (l *DefaultLogger) Error(format string, args ...interface{}) {
 	l.write("[Error]", format, args...)
 }
 
-var logger *Logger
+func (l *DefaultLogger) SetOutput(w io.Writer) {
+	l.logger.SetOutput(w)
+}
+
+var logger Logger
 

@@ -24,7 +24,11 @@ func InitByConfig(cfg *Config) {
 }
 
 func start() {
-	logger = createLogger()
+	if config.logger == nil {
+		logger = createLogger()
+	} else {
+		logger = config.logger
+	}
 	enable()
 
 	go background(&router)
@@ -54,5 +58,5 @@ func Shutdown() {
 }
 
 func DebugOn() {
-	logger.logger.SetOutput(os.Stdout)
+	logger.SetOutput(os.Stdout)
 }

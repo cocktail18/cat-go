@@ -19,6 +19,7 @@ type Config struct {
 	httpServerAddresses []serverAddress
 
 	serverAddress []serverAddress
+	logger Logger
 }
 
 type XMLConfig struct {
@@ -223,5 +224,10 @@ func (config *Config) AddServerAddress(host string, port int) *Config {
 
 func (config *Config) SetLogDir(dir string) *Config {
 	config.logDir = dir
+	return config
+}
+
+func (config *Config) SetLogger(logger Logger) *Config {
+	config.logger = logger
 	return config
 }
